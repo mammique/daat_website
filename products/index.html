@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<title>daat - products</title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+		<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../css/fonts/poppinsregular/stylesheet.css">
+    </head>
+
+    <body>
+
+	    <style type="text/css">
+	    	html, body {
+	    		margin: 0;
+	    		padding: 0;
+	    	}
+	    	body {
+	    		background-color: #005477;
+	    		text-align: center;
+	    	}
+			.sky {
+				background-position: center center;
+				background-size: 150% auto;
+				height: 800px;
+				width: 100%;
+				position: absolute;
+			}
+			#sky_1 {
+				background-image: url(sky_1.jpg);
+			}
+			#sky_2 {
+				display: none;
+				background-image: url(sky_3.jpg);
+			}
+			#banknote_bg {
+				z-index: 200;
+				position: absolute;
+				text-align: center;
+			}
+			#banknote_bg,
+			#banknote_bg .banknote {
+				width: 100%;
+				height: 492px;
+				position: absolute;
+				background: transparent url(banknote_bg.png) center center no-repeat;
+			}
+			#banknotes_desc {
+				z-index: 200;
+				position: absolute;
+				width: 100%;
+				top: 492px;
+			}
+	    </style>
+
+    	<div class="sky" id="sky_1"></div>
+    	<div class="sky" id="sky_2"></div>
+    	<div id="banknote_bg">
+    		<div class="banknote" id="banknote_1"></div>
+    		<div class="banknote" id="banknote_2" style="display: none;"></div>
+    	</div>
+    	<div id="banknotes_desc">
+    		<h2 style="font-weight: bold; color: white; font-family: poppinsregular; letter-spacing: 1pt; text-transform: uppercase;">Contactless Crypto Bill</h2>
+    	</div>
+    </body>
+
+    <script type="text/javascript">
+
+    	$('<img/>')[0].src = $('#sky_2').css('background-image').substr(5).slice(0, -2); // Preload second sky image
+
+    	var skies = $('.sky');
+    	var sky_current_zoom = [150, 60];
+
+    	function sky_zoom() {
+
+    		$.each([0, 1], function(x) {
+
+	    		$(skies[x]).css({'background-size': sky_current_zoom[x]+'% auto'});
+	    		sky_current_zoom[x] = Math.round(sky_current_zoom[x]*10+5, 1)/10;
+
+	    		if(sky_current_zoom[x] == 241) {
+	    			var other = x ? 0 : 1;
+	    			$(skies[other]).css({'z-index': 0});
+	    			$(skies[x]).css({'z-index': 100});
+	    			$(skies[other]).show();
+	    			$(skies[x]).fadeOut(1500);
+	    		}
+
+	    		if(sky_current_zoom[x] > 250) sky_current_zoom[x] = 60;
+	    	});
+    	}
+
+		var banknotes = ['ltc', 'eth', 'zec', 'dash', 'xrp', 'xmr', 'bch', 'neo', 'iota', 'ada', 'ae', 'aid', 'aion', 'banca', 'bcn', 'bnb', 'bnt', 'btg', 'btm', 'bts', 'can', 'cat', 'crnc', 'cvc', 'dcr', 'dgd', 'divx', 'dmarket', 'doge', 'dxt', 'eos', 'etc', 'evn', 'hsr', 'icx', 'jnt', 'kc', 'kmd', 'lrc', 'lsk', 'mkr', 'nano', 'ngc', 'omg', 'ont', 'ox', 'oxy', 'pkt', 'ppt', 'prg', 'qtum', 'rep', 'rhoc', 'sc', 'snt', 'storj', 'strat', 'tns', 'trx', 'usdt', 'veri', 'waves', 'wiz', 'wtt', 'xem', 'xlm', 'xtz', 'xvg', 'zil', 'btc'];
+		$.each(banknotes, function(i, crypto) {
+			
+		})
+
+		$('<img/>')[0].src = 'banknotes/' + banknotes[0] + '.png'; // Preload first banknote
+
+		var banknote_i = 0;
+
+		function banknote_switch() {
+			var next = $('#banknote_bg .banknote[style*="display: none"]');
+			var current = $('#banknote_bg .banknote').not(next);
+			current.css({'z-index': 300});
+			current.fadeOut(1000);
+			next.css({'background-image': 'url(banknotes/' + banknotes[banknote_i] + '.png)'});
+			next.css({'z-index': 400});
+			next.fadeIn(1000);
+			if(banknote_i < banknotes.length-1) banknote_i++;
+			else banknote_i = 0;
+			$('<img/>')[0].src = 'banknotes/' + banknotes[banknote_i] + '.png'; // Preload next banknote
+		}
+
+		var banknote_first = 'btc';
+		if(window.location.hash) {
+			var user_banknote_first = window.location.hash.split('#')[1];
+			if(banknotes.indexOf(user_banknote_first) != -1) banknote_first = user_banknote_first;
+			else window.location = window.location.pathname;
+		} else setInterval(banknote_switch, 4000);
+
+		$('#banknote_bg .banknote:first-of-type').css({'background-image': 'url(banknotes/' + banknote_first + '.png)'});
+    	// setInterval(sky_zoom, 60);
+
+    </script>
+
+</html>
