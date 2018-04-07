@@ -26,7 +26,7 @@
 			.sky {
 				background-position: center center;
 				/*background-size: 150% auto;*/
-				height: 830px;
+				height: 870px;
 				width: 100%;
 			}
 			#home, .sky, #banknote_bg, #banknote_bg .banknote {
@@ -39,7 +39,7 @@
 				padding: 20px;
 			}
 			#secondary_products {
-				margin-top: 830px;
+				margin-top: 870px;
 			}
 			#sky_1 {
 				background-image: url(sky_3.jpg);
@@ -70,6 +70,7 @@
 				text-transform: uppercase;
 			}
 			.desc {
+				text-align: left;
 			}
 			.desc ul {
 				list-style: none;
@@ -80,7 +81,6 @@
 				font-size: 20px;
 				text-transform: uppercase;
 				padding-left: 10px;
-				text-align: left;
 			}
 			.desc ul li:before {
 				padding-right: 7px;
@@ -97,12 +97,16 @@
 			}
 			.desc .desc_text {
 				padding: 10px 20px;
-				text-align: left;
 			}
-			.desc .registration {
-/*				display: inline-block;
-				background-color: red;
-				padding: 15px 30px;*/
+			.registration {
+				display: inline-block;
+				background-color: white;
+				font-weight: bold;
+				font-size: 18px;
+				padding: 10px 20px;
+				color: #800;
+				text-transform: uppercase;
+				margin-top: 30px;
 			}
 			#banknotes_desc {
 				text-align: center;
@@ -140,8 +144,8 @@
 					<li data-text="This current image is the standard design for our bill, but any custom design can be done uppon request.">Custom design</li>
 				</ul>
 				<p class="desc_text"></p>
-				<a href="" class="btn registration">Get it first, free registration!</a>
     		</div>
+			<a href="" class="btn registration">Get it first, free registration!</a>
     	</div>
 
 <!-- 		<div class="container-fluid" id="secondary_products">
@@ -166,7 +170,7 @@
     	windows_resize();
 
     	var skies            = $('.sky');
-    	var sky_zoom_start   = 160;
+    	var sky_zoom_start   = 170;
     	var sky_current_zoom = [sky_zoom_start, sky_zoom_start-90];
 
     	$('#sky_1').css({'background-size': sky_zoom_start+'% auto'});
@@ -221,7 +225,7 @@
 		} else setInterval(banknote_switch, 4000);
 
 		$('#banknote_bg .banknote:first-of-type').css({'background-image': 'url(banknotes/' + banknote_first + '.png)'});
-    	// setInterval(sky_zoom, 60);
+    	setInterval(sky_zoom, 60);
 
     	function desc_hover() {
     		var li = $(this)
