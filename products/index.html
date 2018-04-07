@@ -2,6 +2,8 @@
 <html lang="en">
     <head>
     	<title>daat - products</title>
+    	<meta charset="UTF-8" />
+		<meta name='viewport' content='user-scalable=0'/>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 		<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
@@ -18,31 +20,42 @@
 	    	body {
 	    		background-color: #005477;
 	    		text-align: center;
+	    		color: white;
+	    		font-family: poppinsregular; 
 	    	}
 			.sky {
 				background-position: center center;
-				background-size: 150% auto;
-				height: 800px;
+				/*background-size: 150% auto;*/
+				height: 760px;
 				width: 100%;
+			}
+			#home, .sky, #banknote_bg, #banknote_bg .banknote {
 				position: absolute;
+				top: 0;
+			}
+			#home {
+				z-index: 600;
+				display: block;
+				padding: 20px;
+			}
+			#secondary_products {
+				margin-top: 760px;
 			}
 			#sky_1 {
-				background-image: url(sky_8.jpg);
+				background-image: url(sky_3.jpg);
 			}
 			#sky_2 {
 				display: none;
-				background-image: url(sky_3.jpg);
+				background-image: url(sky_8.jpg);
 			}
 			#banknote_bg {
 				z-index: 200;
-				position: absolute;
 				text-align: center;
 			}
 			#banknote_bg,
 			#banknote_bg .banknote {
 				width: 100%;
 				height: 492px;
-				position: absolute;
 				background: transparent url(banknote_bg.png) center center no-repeat;
 			}
 			#banknotes_desc {
@@ -51,7 +64,43 @@
 				width: 100%;
 				top: 492px;
 			}
+			h1,h2,h3,h4,h5,h6 {
+				font-weight: bold;
+				letter-spacing: 1pt;
+				text-transform: uppercase;
+			}
+			.desc {
+				text-align: left;
+			}
+			.desc ul {
+				list-style: none;
+				padding: 0 10vw;
+			}
+			.desc ul li {
+				padding-left: 10px;
+			}
+			.desc ul li:before {
+				padding-right: 7px;
+				content: '✔' ; /* ✓ */
+			}
+			.desc li.active {
+				background-color: #005477;
+			}
+			.desc li:hover {
+				cursor: pointer;
+			}
+			#banknotes_desc {
+				font-size: 20px;
+				text-transform: uppercase;
+				text-align: center;
+				margin-top: -30px;
+			}
+			#banknotes_desc .desc {
+				margin-top: 40px;
+			}
 	    </style>
+
+	    <a href=".." id="home"><img src="daat.png"></a>
 
     	<div class="sky" id="sky_1"></div>
     	<div class="sky" id="sky_2"></div>
@@ -59,17 +108,42 @@
     		<div class="banknote" id="banknote_1"></div>
     		<div class="banknote" id="banknote_2" style="display: none;"></div>
     	</div>
+
     	<div id="banknotes_desc">
-    		<h2 style="font-weight: bold; color: white; font-family: poppinsregular; letter-spacing: 1pt; text-transform: uppercase;">Contactless Crypto Bill</h2>
+    		<h2>Contactless crypto bill</h2>
+    		<div class="desc">
+				<ul>
+					<li class="active">Self-generated private keys</li>
+					<li>Non-counterfeitable</li>
+					<li>Secure widthdrawal</li>
+					<li>High quality</li>
+					<li>Custom design</li>
+					<li>Ultimate privacy</li>
+				</ul>
+    		</div>
     	</div>
+
+		<div class="container-fluid" id="secondary_products">
+		  <div class="row">
+		    <div class="col-sm">
+		    	card
+		    </div>
+		    <div class="col-sm">
+		    	paper
+		    </div>
+		  </div>
+		</div>
+
     </body>
 
     <script type="text/javascript">
 
-    	$('<img/>')[0].src = $('#sky_2').css('background-image').substr(5).slice(0, -2); // Preload second sky image
+    	var skies            = $('.sky');
+    	var sky_zoom_start   = 150;
+    	var sky_current_zoom = [sky_zoom_start, sky_zoom_start-90];
 
-    	var skies = $('.sky');
-    	var sky_current_zoom = [150, 60];
+    	$('#sky_1').css({'background-size': sky_zoom_start+'% auto'});
+    	$('<img/>')[0].src = $('#sky_2').css('background-image').substr(5).slice(0, -2); // Preload second sky image
 
     	function sky_zoom() {
 
@@ -78,7 +152,7 @@
 	    		$(skies[x]).css({'background-size': sky_current_zoom[x]+'% auto'});
 	    		sky_current_zoom[x] = Math.round(sky_current_zoom[x]*10+5, 1)/10;
 
-	    		if(sky_current_zoom[x] == 241) {
+	    		if(sky_current_zoom[x] == sky_zoom_start + 91) {
 	    			var other = x ? 0 : 1;
 	    			$(skies[other]).css({'z-index': 0});
 	    			$(skies[x]).css({'z-index': 100});
@@ -86,7 +160,7 @@
 	    			$(skies[x]).fadeOut(1500);
 	    		}
 
-	    		if(sky_current_zoom[x] > 250) sky_current_zoom[x] = 60;
+	    		if(sky_current_zoom[x] > sky_zoom_start + 100) sky_current_zoom[x] = sky_zoom_start - 90;
 	    	});
     	}
 
@@ -121,6 +195,14 @@
 
 		$('#banknote_bg .banknote:first-of-type').css({'background-image': 'url(banknotes/' + banknote_first + '.png)'});
     	// setInterval(sky_zoom, 60);
+
+    	function desc_hover() {
+    		var li = $(this)
+    		li.addClass('active');
+    		$('li', li.parent()).not(li).removeClass('active');
+    	}
+    	$('.desc li').hover(desc_hover);
+    	$('.desc li').on('click', desc_hover);
 
     </script>
 
