@@ -56,6 +56,7 @@
 			#banknote_bg .banknote {
 				width: 100%;
 				height: 492px;
+				display: block;
 				background: transparent url(banknote_bg.png) center center no-repeat;
 			}
 			#banknotes_presentation {
@@ -63,6 +64,19 @@
 				position: absolute;
 				width: 100%;
 				top: 492px;
+			}
+			#banknotes_presentation {
+				text-align: center;
+				margin-top: -30px;
+				padding: 0 9vw;
+			}
+			#banknotes_presentation .desc ul, #banknotes_presentation .desc .desc_text {
+				margin-top: 40px;
+				display: inline-block;
+				width: 40vw;
+			}
+			#banknotes_presentation .desc ul {
+				float: left;
 			}
 			h1,h2,h3,h4,h5,h6 {
 				font-weight: bold;
@@ -115,19 +129,6 @@
 			.registration:hover {
 				color: black;
 			}
-			#banknotes_presentation {
-				text-align: center;
-				margin-top: -30px;
-				padding: 0 9vw;
-			}
-			#banknotes_presentation .desc ul, #banknotes_presentation .desc .desc_text {
-				margin-top: 40px;
-				display: inline-block;
-				width: 40vw;
-			}
-			#banknotes_presentation .desc ul {
-				float: left;
-			}
 	    </style>
 
 	    <a href=".." id="home"><img src="daat.png"></a>
@@ -135,8 +136,8 @@
     	<div class="sky" id="sky_1"></div>
     	<div class="sky" id="sky_2"></div>
     	<div id="banknote_bg">
-    		<div class="banknote" id="banknote_1"></div>
-    		<div class="banknote" id="banknote_2" style="display: none;"></div>
+    		<a class="banknote" id="banknote_1" href=""></a>
+    		<a class="banknote" id="banknote_2" href="" style="display: none;"></a>
     	</div>
 
     	<div id="banknotes_presentation">
@@ -147,7 +148,7 @@
 					<li data-text="When scanning the bill for authenticity, the smartphone challenges the microchip to sign data with the private key in real time. Only the original microchip is able to provide the right answer.">Non-counterfeitable</li>
 					<li data-text="When the holder of the bill decides to redeem the crypto-currency contained into it, it triggers an irreversible process that marks the bill as unusable again.">Secure withdrawal</li>
 					<li data-text="Our microchip is made in France and certified by the highest banking cryptographic standards (EMVCo &amp; CC EAL5+).">High quality</li>
-					<li data-text="Unlike online exchange of crypto-currencies, hand to hand exchange does not record any transaction anywhere. The manual exchange is the transaction.">Ultimate privacy</li>
+					<li data-text="Unlike online exchanges of crypto-currencies, hand to hand exchanges do not record any transaction anywhere. The manual exchange is the transaction. Furthermore, as no write access to the blockchain is required, crypto bill exchanges are more resistant to Internet failure or censorship.">Ultimate privacy</li>
 					<li data-text="This current image is the standard design for our bill, but any custom design can be done uppon request.">Custom design</li>
 				</ul>
 				<p class="desc_text"></p>
@@ -216,8 +217,8 @@
 			var current = $('#banknote_bg .banknote').not(next);
 			current.css({'z-index': 300});
 			current.fadeOut(1000);
-			next.css({'background-image': 'url(banknotes/' + banknotes[banknote_i] + '.png)'});
-			next.css({'z-index': 400});
+			next.css({'background-image': 'url(banknotes/' + banknotes[banknote_i] + '.png)', 'z-index': 400});
+			next.attr('href', 'banknotes/' + banknotes[banknote_i] + '.jpg');
 			next.fadeIn(1000);
 			if(banknote_i < banknotes.length-1) banknote_i++;
 			else banknote_i = 0;
@@ -232,7 +233,8 @@
 		} else setInterval(banknote_switch, 4000);
 
 		$('#banknote_bg .banknote:first-of-type').css({'background-image': 'url(banknotes/' + banknote_first + '.png)'});
-    	setInterval(sky_zoom, 60);
+		$('#banknote_bg .banknote:first-of-type').attr('href', 'banknotes/' + banknote_first + '.jpg');
+    	// setInterval(sky_zoom, 60);
 
     	function desc_hover() {
     		var li = $(this)
