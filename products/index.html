@@ -102,6 +102,7 @@
 			.desc ul li:before {
 				padding-right: 7px;
 				content: '✔' ; /* ✓ */
+				color: white!important;
 			}
 			.desc.desc_with_text ul li:hover {
 				background-color: rgba(255,255,255,0.7);
@@ -148,7 +149,8 @@
 				margin-top: 20px;
 			}
 			#paper {
-				background-image: url(backgrounds/field.jpg);
+				background-image: url(backgrounds/paper.jpg);
+				background-position: 90% center;
 			}
 			#paper .desc_text {
 				margin-right: 30px; 
@@ -170,6 +172,9 @@
 				}
 			}
 			@media screen and (max-width: 1100px) {
+				#paper {
+					background-position: 70% center;
+				}
 				#paper .desc_text {
 					margin-right: 20px; 
 					margin-left: 20px; 
