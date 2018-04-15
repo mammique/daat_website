@@ -121,6 +121,10 @@
 				background-color: rgba(0,84,119,0.7)!important;
 				color: white!important;
 			}
+	    	.desc .desc_text a {
+	    		color: white;
+	    		text-decoration: underline;
+	    	}
 			.desc .desc_text {
 				padding: 10px 20px;
 				line-height: 23px;
@@ -159,7 +163,7 @@
 			}
 			#paper {
 				background-image: url(backgrounds/field_2.jpg);
-				background-position: 90% center;
+				/*background-position: 90% center;*/
 			}
 			#paper h2 {
 				margin-top: 40px;
@@ -183,6 +187,58 @@
 			}
 			#paper .registration {
 				margin-top: 20px;
+			}
+			#partners_products {
+				background: transparent url(backgrounds/sky_6.jpg) center center no-repeat;
+				background-size: cover;
+			}
+			#partners_products h2 {
+				padding: 60px 0 30px 0;
+			}
+			#satoricoin, #molinario {
+				height: 616px;
+			}
+			#satoricoin {
+				background: transparent url(satoricoin.jpg) center center no-repeat;
+				background-size: cover;
+				margin: 0 30px 60px 60px;
+			}
+			#molinario {
+				background: white url(molinario.jpg) center top no-repeat;
+				background-size: auto 63%;
+				margin: 0 60px 60px 30px;
+			}
+			#satoricoin .desc .desc_text, #molinario .desc .desc_text {
+				margin: 400px 30px 30px 30px;
+				/*text-transform: uppercase;*/
+				background-color: rgba(0,84,119,0.85)!important;
+			}
+			#satoricoin .desc .desc_text {
+				margin-top: 420px;
+			}
+			#molinario .registration {
+				border: 1px solid #aaa;
+			}
+			@media screen and (max-width: 1350px) {
+				#satoricoin .desc .desc_text {
+					margin-top: 400px;
+				}
+			}
+			@media screen and (max-width: 1250px) {
+				#molinario {
+					background-size: auto 57%;
+				}
+				#molinario .desc .desc_text {
+					margin-top: 360px;
+				}
+			}
+			@media screen and (max-width: 1130px) {
+				#molinario {
+					background-size: auto 50%;
+				}
+				#molinario .desc .desc_text {
+					margin-top: 340px;
+				}
 			}
 			@media screen and (max-width: 1160px) {
 				#paper h2 {
@@ -249,6 +305,9 @@
 					display: inline-block;
 					margin-left: -115px;
 				}
+				#satoricoin, #molinario {
+					margin: 0 60px 60px 60px;
+				}
 			}
 			@media screen and (max-width: 850px) {
 				#paper h2 {
@@ -309,6 +368,24 @@
 	    		</div>
 	    		<br />
 				<a href="https://www.cognitoforms.com/Yooook1/RegisterForContactlessBlockchainElectronicPaperPresale" target="_window" class="btn registration">Get it first, free registration!</a>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="container-fluid" id="partners_products">
+		  <h2>Partners' products</h2>
+		  <div class="row">
+		    <div class="col-lg" id="satoricoin">
+		    	<div class="desc">
+	    			<p class="desc_text">Next generation of <a href="http://satoricoin.jp" target="_window">SatoriCoin</a> will integrate our contactless microchip in the fashion of our crypto bill.</p>
+	    		</div>
+				<a href="" target="_window" class="btn registration">Get it first, free registration!</a>
+		    </div>
+		    <div class="col-lg" id="molinario">
+		    	<div class="desc">
+	    			<p class="desc_text">Renown jeweller <a href="https://www.facebook.com/pg/MarcoMolinarioMonteCarlo/photos/" target="_window">Marco Molinario</a> is designing a collection of jewels integrating our contactless microchip, for anti-counterfeiting, crypto-currency storage, and other innovative services.</p>
+	    		</div>
+				<a href="" target="_window" class="btn registration">Get it first, free registration!</a>
 		    </div>
 		  </div>
 		</div>
